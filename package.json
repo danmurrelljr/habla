@@ -2,7 +2,7 @@
   "name": "habla",
   "version": "1.0.0",
   "description": "Habla is an open source library used by software such as chatbots to support easy localization.",
-  "main": "habla.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,6 @@
     "chatbot",
     "bot"
   ],
-  "author": "danmurrelljr@gmail.com",
+  "author": "Dan Murrell <danmurrelljr@gmail.com>",
   "license": "ISC"
 }
