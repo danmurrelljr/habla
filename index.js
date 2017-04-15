@@ -41,7 +41,7 @@ function localize(key, language, territory) {
 
 	// if not found, look in default library
 	if (localized == undefined) {
-		localized = defaultLibrary[key];
+		localized = this.defaultLibrary[key];
 	}
 
 	if (localized != undefined) {
@@ -59,5 +59,4 @@ module.exports = {
 	localize: localize,
 	defaultLibrary: defaultLibrary,
 	setDefaultLibrary: setDefaultLibrary,
-
 }
