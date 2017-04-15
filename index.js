@@ -14,7 +14,8 @@ function localize(key, language, territory) {
 	// get appropriate library and retrieve localized string from the key
 	// 		First, look in the full locale library.
 	//		If not in the full locale library, look in the language library.
-	//		If not found in the language library, return the key, since
+	//		If not found in the language library, look in the default library.
+	//		If not found in the default library, return the key, since
 	//		we have no localized string available.
 	var locale;
 	var localized;
@@ -38,6 +39,11 @@ function localize(key, language, territory) {
 		localized = languageLibrary[key];
 	}
 
+	// if not found, look in default library
+	if (localized == undefined) {
+		localized = defaultLibrary[key];
+	}
+
 	if (localized != undefined) {
 		return localized;
 	} else {
@@ -45,6 +51,13 @@ function localize(key, language, territory) {
 	}
 }
 
+function setDefaultLibrary(library) {
+	this.defaultLibrary = library;
+}
+
 module.exports = {
 	localize: localize,
+	defaultLibrary: defaultLibrary,
+	setDefaultLibrary: setDefaultLibrary,
+
 }

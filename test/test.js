@@ -15,4 +15,14 @@ describe('Habla', function() {
 			assert.equal(shouldReturnKey, 'key');
 		})
 	});
+
+	var defaultLibrary = {};
+
+	describe('#setDefaultLibrary(library)', function() {
+		it('should set default library when called', function() {
+			habla.setDefaultLibrary(defaultLibrary);
+			var shouldReturnDefaultLibrary = habla.defaultLibrary;
+			assert.equal(shouldReturnDefaultLibrary, defaultLibrary);
+		});
+	});
 });
