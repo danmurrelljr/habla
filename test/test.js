@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 var habla = require('../index.js')
 
@@ -24,5 +26,14 @@ describe('Habla', function() {
 			var shouldReturnDefaultLibrary = habla.defaultLibrary;
 			assert.equal(shouldReturnDefaultLibrary, defaultLibrary);
 		});
+	});
+
+	describe('#localize(key)', function() {
+		it('should return \'This is a localized string\' from defaultLibrary for \'key\'', function() {
+			var keyLibrary = { 'key': 'This is a localized string' };
+			habla.setDefaultLibrary(keyLibrary);
+			var shouldReturnThisIsLocalized = habla.localize('key');
+			assert.equal(shouldReturnThisIsLocalized, 'This is a localized string');
+		})
 	});
 });
