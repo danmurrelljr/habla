@@ -1,14 +1,15 @@
-'use strict';
 
-var libraries = {};
+module.exports = Habla;
+function Habla() {
+	this.libraries = {};
+	this.defaultLibrary = {};
+	this.defaultLanguage = 'en';
+}
 
-var defaultLibrary = {};
-var defaultLanguage = "en";
-
-function localize(key, language, territory) {
+Habla.prototype.localize = function (key, language, territory) {
 	// if no language specified, use default
 	if (language == undefined) {
-		language = defaultLanguage;
+		language = this.defaultLanguage;
 	}
 
 	// get appropriate library and retrieve localized string from the key
@@ -26,8 +27,8 @@ function localize(key, language, territory) {
 		locale = language;
 	}
 
-	var localeLibrary = libraries[locale];
-	var languageLibrary = libraries[language];
+	var localeLibrary = this.libraries[locale];
+	var languageLibrary = this.libraries[language];
 
 	// look in locale library 
 	if (localeLibrary != undefined) {
@@ -51,12 +52,14 @@ function localize(key, language, territory) {
 	}
 }
 
-function setDefaultLibrary(library) {
+Habla.prototype.setDefaultLibrary = function (library) {
 	this.defaultLibrary = library;
 }
 
-module.exports = {
-	localize: localize,
-	defaultLibrary: defaultLibrary,
-	setDefaultLibrary: setDefaultLibrary,
+Habla.prototype.setLibrary = function (library, language, territory) {
+	if (language != undefined && territory != undefined) {
+		this.libraries[language + '_' + territory] = library;
+	} else if (language != undefined) {
+		this.libraries[language] = library;
+	}
 }
