@@ -8,7 +8,7 @@ function Habla() {
 
 Habla.prototype.localize = function (key, language, territory) {
 	// if no language specified, use default
-	if (language == undefined) {
+	if (language === undefined) {
 		language = this.defaultLanguage;
 	}
 
@@ -36,12 +36,12 @@ Habla.prototype.localize = function (key, language, territory) {
 	}
 
 	// if not found, look in language library
-	if (localized == undefined && languageLibrary != undefined) {
+	if (localized === undefined && languageLibrary != undefined) {
 		localized = languageLibrary[key];
 	}
 
 	// if not found, look in default library
-	if (localized == undefined) {
+	if (localized === undefined) {
 		localized = this.defaultLibrary[key];
 	}
 
@@ -64,8 +64,18 @@ Habla.prototype.setLibrary = function (library, language, territory) {
 	}
 }
 
-Habla.prototype.add = function(key, localized) {
-	if (key != undefined) {
+Habla.prototype.add = function(key, localized, language, territory) {
+	if (key != undefined && language != undefined && territory != undefined) {
+		if (this.libraries[(language + '_' + territory)] === undefined) {
+			this.libraries[language + '_' + territory] = {};
+		}
+		this.libraries[language + '_' + territory][key] = localized;
+	} else if (key != undefined && language != undefined) {
+		if (this.libraries[language] === undefined) {
+			this.libraries[language] = {};
+		}
+		this.libraries[language][key] = localized;
+	} else if (key != undefined) {
 		this.defaultLibrary[key] = localized;
 	}
 }

@@ -2,9 +2,13 @@
 
 var assert = require('assert');
 var Habla = require('../index.js')
-var habla = new Habla();
+var habla;
 
 describe('Habla', function() {
+	beforeEach('Initialize habla object', function() {
+		habla = new Habla();
+	});
+
 	describe('#localize()', function() {
 		it('should return \'undefined\' when localize key not provided', function() {
 			var shouldReturnUndefined = habla.localize();
@@ -73,11 +77,41 @@ describe('Habla', function() {
 
 	describe('#add(key, localized)', function() {
 		it('should add \'localized\' for \'key\' to default library when called', function() {
-			var defaultLibrary = {};
-			habla.setDefaultLibrary(defaultLibrary);
 			habla.add('default key', 'default localized');
 			var shouldReturnDefaultLocalized = habla.localize('default key');
 			assert.equal(shouldReturnDefaultLocalized, 'default localized');
+		});
+	});
+
+	describe('#add(key, localized, language)', function() {
+		it('should create a library for \'language\' if not exists when called', function() {
+			habla.add('en key', 'en is localized', 'en');
+			var shouldReturnEnLibrary = habla.libraries['en'];
+			console.log("enLibrary: " + JSON.stringify(shouldReturnEnLibrary));
+			assert.notEqual(shouldReturnEnLibrary, undefined);
+		});
+
+		it('should add \'localized\' for \'key\' to library for \'language\' when called', function() {
+			habla.add('en key', 'en is localized', 'en');
+			var enLibrary = habla.libraries['en'];
+			var shouldReturnEnLocalized = enLibrary['en key'];
+			assert.equal(shouldReturnEnLocalized, 'en is localized');
+		});
+	});
+
+
+	describe('#add(key, localized, language, territory)', function() {
+		it('should create a library for \'language\' and \'territory\' if not exists when called', function() {
+			habla.add('en_US key', 'en_US is localized', 'en', 'US');
+			var shouldReturnEnUSLibrary = habla.libraries['en_US'];
+			assert.notEqual(shouldReturnEnUSLibrary, undefined);
+		});
+
+		it('should add \'localized\' for \'key\' to library for \'language\' and \'territory\' when called', function() {
+			habla.add('en_US key', 'en_US is localized', 'en', 'US');
+			var shouldReturnEnUSLibrary = habla.libraries['en_US'];
+			var shouldReturnEnUSLocalized = shouldReturnEnUSLibrary['en_US key'];
+			assert.equal(shouldReturnEnUSLocalized, 'en_US is localized');
 		});
 	});
 });
