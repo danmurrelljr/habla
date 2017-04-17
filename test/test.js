@@ -44,10 +44,9 @@ describe('Habla', function() {
 		});
 	});
 
-	var defaultLibrary = {};
-
 	describe('#setDefaultLibrary(library)', function() {
 		it('should set default library when called', function() {
+			var defaultLibrary = {};
 			habla.setDefaultLibrary(defaultLibrary);
 			var shouldReturnDefaultLibrary = habla.defaultLibrary;
 			assert.equal(shouldReturnDefaultLibrary, defaultLibrary);
