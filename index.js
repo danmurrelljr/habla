@@ -56,6 +56,10 @@ Habla.prototype.setDefaultLibrary = function (library) {
 	this.defaultLibrary = library;
 }
 
-Habla.prototype.setLibrary = function (library, language) {
-	this.libraries[language] = library;
+Habla.prototype.setLibrary = function (library, language, territory) {
+	if (language != undefined && territory != undefined) {
+		this.libraries[language + '_' + territory] = library;
+	} else if (language != undefined) {
+		this.libraries[language] = library;
+	}
 }

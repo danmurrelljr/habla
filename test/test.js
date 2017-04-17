@@ -35,6 +35,15 @@ describe('Habla', function() {
 		});
 	});
 
+	describe('#localize(key, language, territory)', function() {
+		it('should return \'This is a localized en_US string\' from enLibrary for \'key\' when language is \'en\' and territory is \'US\'', function () {
+			var enUSLibrary = { 'key': 'This is a localized en_US string' };
+			habla.setLibrary(enUSLibrary, 'en', 'US');
+			var shouldReturnLocalizedEnUS = habla.localize('key', 'en', 'US');
+			assert.equal(shouldReturnLocalizedEnUS, 'This is a localized en_US string');
+		});
+	});
+
 	var defaultLibrary = {};
 
 	describe('#setDefaultLibrary(library)', function() {
@@ -52,5 +61,14 @@ describe('Habla', function() {
 			var shouldReturnEnLibrary = habla.libraries['en'];
 			assert.equal(shouldReturnEnLibrary, enLibrary);
 		})
+	});
+
+	describe('#setLibrary(forLibrary, language, territory)', function() {
+		it('should set library for \'en\' and \'US\' when called', function() {
+			var enUSLibrary = { 'key': 'This is a localized en_US string' };
+			habla.setLibrary(enUSLibrary, 'en', 'US');
+			var shouldReturnEnUSLibrary = habla.libraries['en_US'];
+			assert.equal(shouldReturnEnUSLibrary, enUSLibrary);
+		});
 	});
 });
