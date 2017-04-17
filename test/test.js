@@ -70,4 +70,14 @@ describe('Habla', function() {
 			assert.equal(shouldReturnEnUSLibrary, enUSLibrary);
 		});
 	});
+
+	describe('#add(key, localized)', function() {
+		it('should add \'localized\' for \'key\' to default library when called', function() {
+			var defaultLibrary = {};
+			habla.setDefaultLibrary(defaultLibrary);
+			habla.add('default key', 'default localized');
+			var shouldReturnDefaultLocalized = habla.localize('default key');
+			assert.equal(shouldReturnDefaultLocalized, 'default localized');
+		});
+	});
 });
