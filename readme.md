@@ -123,3 +123,14 @@ Habla uses mocha for unit tests. To run all tests, use:
 
 ## Future Enhancements
 
+Habla 1.0.0 is currently an intentionally-simple library targeted towards localizing user-facing text. 
+
+Planned future enhancements include: 
+
+- importing files of localized strings
+- formatting dates
+- formatting numbers
+
+## Version History
+
+1.0.0 - Initial release
