@@ -52,6 +52,10 @@ Habla.prototype.localize = function (key, language, territory) {
 	}
 }
 
+Habla.prototype.setDefaultLanguage = function (language) {
+	this.defaultLanguage = language;
+}
+
 Habla.prototype.setDefaultLibrary = function (library) {
 	this.defaultLibrary = library;
 }

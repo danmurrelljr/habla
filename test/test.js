@@ -57,6 +57,15 @@ describe('Habla', function() {
 		});
 	});
 
+	describe('#setDefaultLanguage(language)', function() {
+		it('should set default language when called', function() {
+			var es = "es";
+			habla.setDefaultLanguage(es);
+			var shouldReturnEsLanguage = habla.defaultLanguage;
+			assert.equal(shouldReturnEsLanguage, es);
+		});
+	});
+
 	describe('#setLibrary(forLibrary, language)', function() {
 		it('should set library for \'en\' when called', function() {
 			var enLibrary = { 'key': 'This is a localized en string' };
@@ -98,7 +107,6 @@ describe('Habla', function() {
 			assert.equal(shouldReturnEnLocalized, 'en is localized');
 		});
 	});
-
 
 	describe('#add(key, localized, language, territory)', function() {
 		it('should create a library for \'language\' and \'territory\' if not exists when called', function() {
