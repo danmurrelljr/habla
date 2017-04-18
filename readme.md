@@ -64,22 +64,47 @@ When setting a language library, you can specify just a language, or both a lang
 
 To set libraries, use:
 
-```var myEnLibrary = { "en key": "en value", "en key2": "en value2", "en key3": "en value3" };
-habla.setLibrary(myEnLibrary, "en");```
+```
+var myEnLibrary = { "en key": "en value", "en key2": "en value2", "en key3": "en value3" };
+habla.setLibrary(myEnLibrary, "en");
+```
 
-```var myEnUSLibrary = { "en US key": "en US value", "en US key2": "en US value2", "en US key3": "en US value3" };
-habla.setLibrary(myEnUSLibrary, "en", "US");```
+```
+var myEnUSLibrary = { "en US key": "en US value", "en US key2": "en US value2", "en US key3": "en US value3" };
+habla.setLibrary(myEnUSLibrary, "en", "US");
+```
 
 
 Habla supports a default language, initially set to "en" (English). To change the default language, call:
 
 `habla.setDefaultLanguage(language);`
 
-To retrieve a localized string from the library
+To retrieve a localized string from the library, use:
+
+`var string = habla.localize(key[, language, territory]);`
+
+Language and territory are optional parameters. If Habla cannot find the correct localized string, it will return the original requested key. A benefit is it will allow you to easily identify strings that have not been localized, due to a typo or having been missed.
 
 When Habla is searching for a localized string, the order it searches the libraries is:
 
-# If language
+1. If language and territory is given, check the language_Territory library and return the value for matching key.
+2. If not found and language is given, check the language library and return the value for matching key.
+3. If not found, check the default library and return the value for matching key.
+4. Return the key.
+
+Habla allows you to individually add and remove a key from the libraries.
+
+To add a key, use:
+
+`habla.add(key, value[, language, territory]);`
+
+Language and territory are optional, and if not provided, the key is added to the default library. If a language library doesn't currently exist, one will be created.
+
+To remove a key, use:
+
+`habla.remove(key[, language, territory]);`
+
+Language and territory are optional, and if not provided, the key is removed from the default library.
 
 ## Tests
 
