@@ -7,7 +7,7 @@
     "test": "mocha"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
+    "mocha": "^3.2.0"
   },
   "keywords": [
     "localization",
