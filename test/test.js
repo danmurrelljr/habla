@@ -28,6 +28,13 @@ describe('Habla', function() {
 			var shouldReturnThisIsLocalized = habla.localize('key');
 			assert.equal(shouldReturnThisIsLocalized, 'This is a localized string');
 		});
+
+		it('should return \'This is a localized string\' from enLibrary for \'key\' when en is default language and en library is set', function() {
+			var enLibrary = { 'key': 'This is a localized en string' };
+			habla.setLibrary(enLibrary, 'en');
+			var shouldReturnThisIsLocalized = habla.localize('key');
+			assert.equal(shouldReturnThisIsLocalized, 'This is a localized en string');
+		});
 	});
 
 	describe('#localize(key, language)', function() {
@@ -36,6 +43,13 @@ describe('Habla', function() {
 			habla.setLibrary(enLibrary, 'en');
 			var shouldReturnLocalizedEn = habla.localize('key', 'en');
 			assert.equal(shouldReturnLocalizedEn, 'This is a localized en string');
+		});
+
+		it('should return \'This is a localized en string\' from enLibrary for \'key\' when language is \'undefined\'', function () {
+			var enLibrary = { 'key': 'This is a localized en string when undefined' };
+			habla.setLibrary(enLibrary, 'en');
+			var shouldReturnLocalizedEn = habla.localize('key', undefined);
+			assert.equal(shouldReturnLocalizedEn, 'This is a localized en string when undefined');
 		});
 	});
 
