@@ -83,3 +83,17 @@ Habla.prototype.add = function(key, localized, language, territory) {
 		this.defaultLibrary[key] = localized;
 	}
 }
+
+Habla.prototype.remove = function(key, language, territory) {
+	if (key != undefined && language != undefined && territory != undefined) {
+		if (this.libraries[(language + '_' + territory)] !== undefined) {
+		this.libraries[language + '_' + territory][key] = undefined;
+		}
+	} else if (key != undefined && language != undefined) {
+		if (this.libraries[language] !== undefined) {
+			this.libraries[language][key] = undefined;
+		}
+	} else if (key != undefined) {
+		this.defaultLibrary[key] = undefined;
+	}
+}
