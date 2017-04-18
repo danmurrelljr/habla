@@ -50,6 +50,8 @@ The string has an English translation, but what if the user is chatting with a b
 
 Habla uses two libraries. One library is designed for the various languages you will support, while the other is a default library for responses that are not categorized for any particular language. 
 
+### Default Library
+
 To set the default library, use:
 
 ```
@@ -59,6 +61,8 @@ var habla = new Habla();
 var myDefaultLibrary = { "key": "value", "key2": "value2", "key3": "value3" };
 habla.setDefaultLibrary(myDefaultLibrary);
 ```
+
+### Language Libraries
 
 When setting a language library, you can specify just a language, or both a language and a territory. Habla combines language and territory in the format `{language}_{territory}`. For example, `"en_US"`. You can also specify both in one parameter. 
 
@@ -74,10 +78,13 @@ var myEnUSLibrary = { "en US key": "en US value", "en US key2": "en US value2", 
 habla.setLibrary(myEnUSLibrary, "en", "US");
 ```
 
+### Default Language
 
 Habla supports a default language, initially set to "en" (English). To change the default language, call:
 
 `habla.setDefaultLanguage(language);`
+
+### Retrieving Localized Text
 
 To retrieve a localized string from the library, use:
 
@@ -91,6 +98,8 @@ When Habla is searching for a localized string, the order it searches the librar
 2. If not found and language is given, check the language library and return the value for matching key.
 3. If not found, check the default library and return the value for matching key.
 4. Return the key.
+
+### Adding and Removing Keys
 
 Habla allows you to individually add and remove a key from the libraries.
 
