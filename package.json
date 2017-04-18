@@ -2,7 +2,7 @@
   "name": "habla",
   "version": "1.0.0",
   "description": "Easy localization for chatbots.",
-  "main": "index.js",
+  "main": "habla.js",
   "scripts": {
     "test": "mocha"
   },

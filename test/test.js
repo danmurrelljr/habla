@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('assert');
-var Habla = require('../index.js')
+var Habla = require('../habla.js')
 var habla;
 
 describe('Habla', function() {

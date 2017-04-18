@@ -46,4 +46,46 @@ One way to accomplish both is to use name-spaced keys. For example,
 
 The string has an English translation, but what if the user is chatting with a bot in Spanish? Instead of seeing a friendly greeting, they should see the key itself.
 
+## Usage
+
+Habla uses two libraries. One library is designed for the various languages you will support, while the other is a default library for responses that are not categorized for any particular language. 
+
+To set the default library, use:
+
+```
+var Habla = require('habla');
+var habla = new Habla();
+
+var myDefaultLibrary = { "key": "value", "key2": "value2", "key3": "value3" };
+habla.setDefaultLibrary(myDefaultLibrary);
+```
+
+When setting a language library, you can specify just a language, or both a language and a territory. Habla combines language and territory in the format {language}_{territory}. For example, `"en_US"`. You can also specify both in one parameter. 
+
+To set libraries, use:
+
+```var myEnLibrary = { "en key": "en value", "en key2": "en value2", "en key3": "en value3" };
+habla.setLibrary(myEnLibrary, "en");```
+
+```var myEnUSLibrary = { "en US key": "en US value", "en US key2": "en US value2", "en US key3": "en US value3" };
+habla.setLibrary(myEnUSLibrary, "en", "US");```
+
+
+Habla supports a default language, initially set to "en" (English). To change the default language, call:
+
+`habla.setDefaultLanguage(language);`
+
+To retrieve a localized string from the library
+
+When Habla is searching for a localized string, the order it searches the libraries is:
+
+# If language
+
+## Tests
+
+Habla uses mocha for unit tests. To run all tests, use:
+
+`npm test`
+
+## Future Enhancements
 
