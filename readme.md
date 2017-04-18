@@ -60,7 +60,7 @@ var myDefaultLibrary = { "key": "value", "key2": "value2", "key3": "value3" };
 habla.setDefaultLibrary(myDefaultLibrary);
 ```
 
-When setting a language library, you can specify just a language, or both a language and a territory. Habla combines language and territory in the format {language}_{territory}. For example, `"en_US"`. You can also specify both in one parameter. 
+When setting a language library, you can specify just a language, or both a language and a territory. Habla combines language and territory in the format `{language}_{territory}`. For example, `"en_US"`. You can also specify both in one parameter. 
 
 To set libraries, use:
 
