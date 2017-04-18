@@ -28,6 +28,13 @@ describe('Habla', function() {
 			var shouldReturnThisIsLocalized = habla.localize('key');
 			assert.equal(shouldReturnThisIsLocalized, 'This is a localized string');
 		});
+
+		it('should return \'This is a localized string\' from enLibrary for \'key\' when en is default language and en library is set', function() {
+			var enLibrary = { 'key': 'This is a localized en string' };
+			habla.setLibrary(enLibrary, 'en');
+			var shouldReturnThisIsLocalized = habla.localize('key');
+			assert.equal(shouldReturnThisIsLocalized, 'This is a localized en string');
+		});
 	});
 
 	describe('#localize(key, language)', function() {
@@ -36,6 +43,13 @@ describe('Habla', function() {
 			habla.setLibrary(enLibrary, 'en');
 			var shouldReturnLocalizedEn = habla.localize('key', 'en');
 			assert.equal(shouldReturnLocalizedEn, 'This is a localized en string');
+		});
+
+		it('should return \'This is a localized en string\' from enLibrary for \'key\' when language is \'undefined\'', function () {
+			var enLibrary = { 'key': 'This is a localized en string when undefined' };
+			habla.setLibrary(enLibrary, 'en');
+			var shouldReturnLocalizedEn = habla.localize('key', undefined);
+			assert.equal(shouldReturnLocalizedEn, 'This is a localized en string when undefined');
 		});
 	});
 
@@ -54,6 +68,15 @@ describe('Habla', function() {
 			habla.setDefaultLibrary(defaultLibrary);
 			var shouldReturnDefaultLibrary = habla.defaultLibrary;
 			assert.equal(shouldReturnDefaultLibrary, defaultLibrary);
+		});
+	});
+
+	describe('#setDefaultLanguage(language)', function() {
+		it('should set default language when called', function() {
+			var es = "es";
+			habla.setDefaultLanguage(es);
+			var shouldReturnEsLanguage = habla.defaultLanguage;
+			assert.equal(shouldReturnEsLanguage, es);
 		});
 	});
 
@@ -87,7 +110,6 @@ describe('Habla', function() {
 		it('should create a library for \'language\' if not exists when called', function() {
 			habla.add('en key', 'en is localized', 'en');
 			var shouldReturnEnLibrary = habla.libraries['en'];
-			console.log("enLibrary: " + JSON.stringify(shouldReturnEnLibrary));
 			assert.notEqual(shouldReturnEnLibrary, undefined);
 		});
 
@@ -98,7 +120,6 @@ describe('Habla', function() {
 			assert.equal(shouldReturnEnLocalized, 'en is localized');
 		});
 	});
-
 
 	describe('#add(key, localized, language, territory)', function() {
 		it('should create a library for \'language\' and \'territory\' if not exists when called', function() {
@@ -114,4 +135,35 @@ describe('Habla', function() {
 			assert.equal(shouldReturnEnUSLocalized, 'en_US is localized');
 		});
 	});
+
+	describe('#remove(key)', function() {
+		it('should remove key that was previously added when called', function() {
+			habla.add('default key', 'default localized');
+			var shouldReturnDefaultLocalized = habla.localize('default key');
+			habla.remove('default key');
+			var shouldReturnDefaultKey = habla.localize('default key');
+			assert.notEqual(shouldReturnDefaultLocalized, shouldReturnDefaultKey);
+		});
+	});
+
+	describe('#remove(key, language)', function() {
+		it('should remove key that was previously added to a \'language\' library when called', function() {
+			habla.add('en key', 'en localized', "en");
+			var shouldReturnEnLocalized = habla.localize('en key', 'en');
+			habla.remove('en key', 'en');
+			var shouldReturnEnKey = habla.localize('en key', 'en');
+			assert.notEqual(shouldReturnEnLocalized, shouldReturnEnKey);
+		});
+	});
+
+	describe('#remove(key, language, territory)', function() {
+		it('should remove key that was previously added to a \'language\' and \'territory\' library when called', function() {
+			habla.add('en key', 'en localized', 'en', 'US');
+			var shouldReturnEnUSLocalized = habla.localize('en key', 'en', 'US');
+			habla.remove('en key', 'en', 'US');
+			var shouldReturnEnUSKey = habla.localize('en key', 'en', 'US');
+			assert.notEqual(shouldReturnEnUSLocalized, shouldReturnEnUSKey);
+		});
+	});
+
 });
